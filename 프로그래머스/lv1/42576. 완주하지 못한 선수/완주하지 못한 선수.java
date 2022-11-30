@@ -8,6 +8,8 @@ class Solution {
         // for(int i=0; i<completion.length; i++) {
         //     if(!completion[i].equals(participant[i])) return participant[i];
         // }
+        // return participant[participant.length-1];
+        
         Map<String, Long> map = Arrays.stream(participant).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         // HashMap<String, Integer> map = new HashMap<>();
         // for(String name : participant) map.put(name, map.getOrDefault(name, 0) + 1);
@@ -17,6 +19,6 @@ class Solution {
         for(Map.Entry<String, Long> el : entry){
             if(el.getValue() != 0) return el.getKey();
         }
-        return participant[participant.length-1];
+        return "";
     }
 }
