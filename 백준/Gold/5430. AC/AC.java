@@ -1,68 +1,68 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayDeque;
-import java.util.Scanner;
+import java.util.Deque;
 import java.util.StringTokenizer;
 
 public class Main {
-	public static Scanner in = new Scanner(System.in);
-	public static StringBuilder sb = new StringBuilder();
+	public static void main(String[] args) throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		int caseNum = Integer.parseInt(bf.readLine());
 
-	public static void main(String[] args) {
-		ArrayDeque<Integer> deque;
-		StringTokenizer st;
-		int cnt = in.nextInt();
-		for(int i = 0; i<cnt; i++) {
-			String command = in.next();	
-			int n = in.nextInt();
-			st = new StringTokenizer(in.next(), "[],");
-			deque = new ArrayDeque<Integer>();
-			for(int j = 0; j < n; j++) {
+		for(int i=0; i<caseNum; i++) {
+			Deque<Integer> deque = new ArrayDeque<>();
+			String s = bf.readLine();
+			String size = bf.readLine();
+			int idx = Integer.parseInt(size);
+			String number = bf.readLine();
+			StringTokenizer st = new StringTokenizer(number, "[,]");
+
+			boolean reverse = true;
+			boolean isError = false;
+
+			for(int j=0; j<idx; j++) {
 				deque.add(Integer.parseInt(st.nextToken()));
 			}
-			AC(command, deque);
-		}
-		System.out.println(sb);
-	}
-	public static void AC(String command, ArrayDeque<Integer> deque) {
-		boolean isRight = true;
 
-		for(char cmd : command.toCharArray()) {
-
-			if(cmd == 'R') {
-				isRight = !isRight;
-				continue;
-			}
-			if(isRight) {
-				if(deque.pollFirst() == null) {
-					sb.append("error\n");
-					return;
+			for (int j = 0; j < s.length(); j++) {
+				if (s.charAt(j) == 'R') {
+					reverse = !reverse;
+				} else {
+					if (reverse) {
+						if(deque.pollFirst() == null) {
+							isError = true;
+						}
+					} else {
+						if(deque.pollLast() == null) {
+							isError = true;
+						}
+					}
 				}
 			}
-			else {
-				if(deque.pollLast() == null) {
-					sb.append("error\n");
-					return;
-				}
-			}
-		}
-		makePrintString(deque, isRight);
-	}
-
-	public static void makePrintString(ArrayDeque<Integer> deque, boolean isRight) {
-		sb.append('[');
-		if(deque.size() > 0) {
-			if(isRight) {
-				sb.append(deque.pollFirst());	
-				while(!deque.isEmpty()) {
-					sb.append(',').append(deque.pollFirst());
-				}
-			}
-			else {
-				sb.append(deque.pollLast());
-				while(!deque.isEmpty()) {
-					sb.append(',').append(deque.pollLast());
-				}
+			if (!isError) {
+				sb.append("[");
+                if(deque.size() > 0) {
+                    if (reverse) {
+                        sb.append(deque.pollFirst());
+                        while(!deque.isEmpty()) {
+                            sb.append(",");
+                            sb.append(deque.pollFirst());
+                        }
+                    } else {
+                        sb.append(deque.pollLast());
+                        while(!deque.isEmpty()) {
+                            sb.append(",");
+                            sb.append(deque.pollLast());
+                        }
+                    }
+                }
+				sb.append("]\n");
+			} else {
+				sb.append("error\n");
 			}
 		}
-		sb.append(']').append('\n');
+		System.out.print(sb);
 	}
 }
