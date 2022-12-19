@@ -14,6 +14,7 @@ class Solution {
         
         return mbtis(cnt);
     }
+    
     public int idNum(char c){
         if(c=='T' || c == 'R')
             return 0;
@@ -24,6 +25,7 @@ class Solution {
         else 
             return 3;
     }
+    
     public String mbtis(int[] cnt){
         String[] mbtis = {"RT", "CF", "JM","AN"};
         String answer = "";
