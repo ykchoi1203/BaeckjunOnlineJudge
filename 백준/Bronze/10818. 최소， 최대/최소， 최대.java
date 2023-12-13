@@ -1,14 +1,21 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+	public static void main(String[] args) throws IOException {
+//		Scanner sc = new Scanner(System.in);
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
-		int n = sc.nextInt();
+
+//		int n = sc.nextInt();
+		int n = Integer.parseInt(bf.readLine());
+		String[] numbers = bf.readLine().split(" ");
+
 		long max = -1000001, min = 1000001;
 		int number;
 		for(int i = 0; i < n; i++) {
-			number = sc.nextInt();
+			number = Integer.parseInt(numbers[i]);
 			if(max < number) {
 				max = number;
 			}
@@ -18,5 +25,6 @@ public class Main {
 		}
 
 		System.out.println(min + " " + max);
+
 	}
 }
