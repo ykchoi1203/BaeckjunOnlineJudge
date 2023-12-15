@@ -1,22 +1,25 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 public class Main {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+	public static void main(String[] args) throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
+		
+		String[] input;
 
 		int k, n;
 		LinkedList<Integer> list = new LinkedList<>();
-		LinkedList<Integer> answer = new LinkedList<>();
-		k = sc.nextInt();
-		n = sc.nextInt();
+		input = bf.readLine().split(" ");
+		k = Integer.parseInt(input[0]);
+		n = Integer.parseInt(input[1]);
 
 		for(int i=1; i<=k; i++) {
 			list.add(i);
 		}
-
-
+		
 		sb.append("<");
 		while(!list.isEmpty()) {
 			for(int i=0; i<n-1; i++) {
@@ -28,6 +31,6 @@ public class Main {
 		sb.replace(sb.length()-2, sb.length(),">");
 
 		System.out.println(sb);
-
+		
 	}
 }
