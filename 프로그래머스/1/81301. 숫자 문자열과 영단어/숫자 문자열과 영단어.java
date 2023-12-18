@@ -6,7 +6,7 @@ class Solution {
         String[] numbers = new String[] {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
         
         for(int i=0; i<numbers.length; i++) {
-            s = s.replaceAll(numbers[i], i + "");  
+            s = s.replaceAll(numbers[i], Integer.toString(i));  
         }
         
 // 		HashMap<String, String> numberMap = new HashMap<>();
