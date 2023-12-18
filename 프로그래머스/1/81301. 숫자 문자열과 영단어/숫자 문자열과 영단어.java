@@ -37,7 +37,6 @@ class Solution {
             answer.append(numberMap.get(word.toString()));
         }
        
-        
         return  Integer.parseInt(answer.toString());
     }
 }
