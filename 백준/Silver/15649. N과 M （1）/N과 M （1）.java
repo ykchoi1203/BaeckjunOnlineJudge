@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
+	public static StringBuilder sb = new StringBuilder();
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -12,14 +13,16 @@ public class Main {
 		int[] answer = new int[n];
 		boolean[] visited = new boolean[num + 1];
 		dfs(num, visited, 0, answer);
+		System.out.println(sb.toString());
 	}
 
 	public static void dfs(int num, boolean[] visited, int depth, int[] answer) {
 		if(depth == answer.length) {
 			for(int i : answer) {
-				System.out.print(i + " ");
+				sb.append(i);
+				sb.append(" ");
 			}
-			System.out.println();
+			sb.append("\n");
 			return;
 		}
 
