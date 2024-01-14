@@ -14,7 +14,9 @@ public class Main {
 		int lastPrimeNum = 2;
 		int nextPrimeNUm = 2;
 		for(int i=3; i<primeLastNum.length; i++) {
-			if(primeNum(i)) {
+            if(i % 2 == 0) {
+				primeLastNum[i] = lastPrimeNum;
+			} else if(primeNum(i)) {
 				primeLastNum[i] = lastPrimeNum;
 				primeNextNum[nextPrimeNUm] = i;
 				nextPrimeNUm = i;
@@ -59,7 +61,7 @@ public class Main {
 
 	public static boolean primeNum(int n) {
 		if(n < 2) return false;
-		for(int i=2; i<=Math.sqrt(n); i++) {
+		for(int i=3; i<=Math.sqrt(n); i+=2) {
 			if(n % i == 0) return false;
 		}
 
