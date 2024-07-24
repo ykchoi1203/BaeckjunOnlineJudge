@@ -1,41 +1,48 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 
 public class Main {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-
-		int N = sc.nextInt();
-		int M = sc.nextInt();
-		int answer = 0;
-		int[][] arr = new int[N+1][N+1];
-		boolean[] visited = new boolean[N+1];
-
-		for(int i=0; i<M; i++) {
-			int num1 = sc.nextInt();
-			int num2 = sc.nextInt();
-			arr[num1][num2] = 1;
-			arr[num2][num1] = 1;
-		}
-
-
-		Queue<Integer> queue = new LinkedList<>();
-
-		queue.add(1);
-		visited[1] = true;
-		while(!queue.isEmpty()) {
-			int num = queue.poll();
-			for(int i=1; i<=N; i++) {
-				if(!visited[i] && arr[num][i] == 1) {
-					queue.add(i);
-					visited[i] = true;
-					answer++;
-				}
-			}
-		}
-
-		System.out.println(answer);
-
-	}
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        int N = Integer.parseInt(br.readLine());
+        int K = Integer.parseInt(br.readLine());
+        boolean[] visited = new boolean[N+1];
+        
+        Map<Integer, ArrayList<Integer>> map = new HashMap<>();
+        
+        for(int i=1; i<=N; i++) {
+            map.put(i, new ArrayList<>());
+        }
+        
+        
+        for(int i = 0; i<K; i++) {
+            String[] cur = br.readLine().split(" ");
+            
+            map.get(Integer.parseInt(cur[0])).add(Integer.parseInt(cur[1]));
+            map.get(Integer.parseInt(cur[1])).add(Integer.parseInt(cur[0]));
+        }
+        
+        int answer = 0;
+        Queue<Integer> queue = new LinkedList<>();
+        
+        queue.add(1);
+        
+        while(!queue.isEmpty()) {
+            int cur = queue.poll();
+            
+            if(!visited[cur]) {
+                for(int next : map.get(cur)) {
+                    if(!visited[next]) {
+                        queue.add(next);
+                    }
+                }
+                visited[cur] = true;
+                answer++;
+            }
+        }
+        
+        System.out.println(answer-1);
+        
+    }
 }
