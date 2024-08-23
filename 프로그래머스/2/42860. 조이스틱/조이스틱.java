@@ -17,7 +17,7 @@ class Solution {
         }
         
         answer = dir[dir.length-1] + dir.length - 1;
-        if(dir.length > 7 ) System.out.println(dir[7]);
+        
         for(int i=0; i<name.length(); i++) {
             int sum = 0;
             int start = i;
@@ -32,9 +32,6 @@ class Solution {
             }
             
             if(start != end) {
-                System.out.println(start + " " + end);
-                System.out.println(dir[start] + (start * 2) + reverse[end] + reverse.length - end);
-                System.out.println(reverse[end] + (dir.length - end) * 2 + dir[start] + start);
                 answer = Math.min(answer , Math.min(dir[start] + (start * 2) + reverse[end] + dir.length - end, reverse[end] + (dir.length - end) * 2 + dir[start] + start));
             }
         }
