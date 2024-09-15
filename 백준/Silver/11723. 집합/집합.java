@@ -7,39 +7,30 @@ public class Main {
         
         int m = Integer.parseInt(br.readLine());
         
-        Set<Integer> setAll = new HashSet<>();
+        boolean[] x = new boolean[21];
         
-        for(int i=1; i<=20; i++) {
-            setAll.add(i);
-        }
-        
-        Set<Integer> set = new HashSet<>();
         StringBuilder sb = new StringBuilder();
         for(int i=0; i<m; i++) {
             String[] arr = br.readLine().split(" ");
             
             switch(arr[0]) {
                 case "add":
-                    set.add(Integer.parseInt(arr[1]));
+                    x[Integer.parseInt(arr[1])] = true;
                     break;
                 case "check":
-                    sb.append(set.contains(Integer.parseInt(arr[1])) ? 1 : 0).append("\n");
+                    sb.append(x[Integer.parseInt(arr[1])] ? 1 : 0).append("\n");
                     break;
                 case "remove":
-                    set.remove(Integer.parseInt(arr[1]));
+                    x[Integer.parseInt(arr[1])] = false;
                     break;
                 case "toggle":
-                    if(set.contains(Integer.parseInt(arr[1]))) {
-                        set.remove(Integer.parseInt(arr[1]));
-                    } else {
-                        set.add(Integer.parseInt(arr[1]));
-                    }
+                    x[Integer.parseInt(arr[1])] = !x[Integer.parseInt(arr[1])];
                     break;
                 case "all":
-                    set.addAll(setAll);
+                    Arrays.fill(x, true);
                     break;
                 case "empty":
-                    set = new HashSet<>();
+                    Arrays.fill(x, false);
                     break;
             }
         }
