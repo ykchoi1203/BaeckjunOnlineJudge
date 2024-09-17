@@ -12,15 +12,15 @@ public class Main {
             arr[i] = sc.nextInt();
         }
         
-        TreeMap<Integer, Integer> map = new TreeMap<>();
+        TreeSet<Integer> map = new TreeSet<>();
         
         for(int num : arr) {
-            map.put(num, map.getOrDefault(num, 0) + 1);
+            map.add(num);
         }
         
         Map<Integer, Integer> round = new HashMap<>();
         int sum = 0;
-        for(int key : map.keySet()) {
+        for(int key : map) {
             round.put(key, sum);
             sum++;
         }
