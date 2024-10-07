@@ -15,29 +15,25 @@ public class Main {
         
         long answer = 0;
         Arrays.sort(arr);
-        
         int idx = 0;
-        
-        while(idx < n - k + 1) {
-            if(arr[idx] <= 0 && arr[idx + k - 1] <= 0) {
-                answer += Math.abs(arr[idx]) * 2;
-            } else if(arr[idx] >= 0 && arr[idx + k - 1] >= 0) {
-                answer += arr[idx + k - 1] * 2;
-            } else {
-                answer += Math.abs(arr[idx]) * 2 + arr[idx + k - 1] * 2;
-            }
-            
+        while(arr[idx] <= 0 && idx + k < n && arr[idx + k] <= 0) {
+            answer += Math.abs(arr[idx] * 2);
             idx += k;
         }
         
-        if(idx < n - 1) {
-            if(arr[idx] <= 0 && arr[n - 1] <= 0) {
-                answer += Math.abs(arr[idx]) * 2;
-            } else if(arr[idx] >= 0 && arr[n - 1] >= 0) {
-                answer += arr[n - 1] * 2;
-            } else {
-                answer += Math.abs(arr[idx]) * 2 + arr[n - 1] * 2;
-            }
+        if(arr[idx] < 0) {
+            answer += Math.abs(arr[idx] * 2);
+        }
+        
+        int plusIdx = n-1;
+        
+        while(arr[plusIdx] > 0 && plusIdx - k >= 0 && arr[plusIdx - k] >= 0) {
+            answer += arr[plusIdx] * 2;
+            plusIdx -= k;
+        }
+        
+        if(arr[plusIdx] > 0) {
+            answer += arr[plusIdx] * 2;
         }
         
         System.out.println(answer);
