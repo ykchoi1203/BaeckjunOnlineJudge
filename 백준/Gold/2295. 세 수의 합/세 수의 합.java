@@ -26,12 +26,20 @@ public class Main {
         
         for(int i = arr.length - 1; i >= 0; i--) {
             for(int sum : set) {
-                for(int j = arr.length - 1; j >= 0; j--) {
-                    if(arr[j] + sum == arr[i]) {
+                int left = 0;
+                int right = arr.length-1;
+                
+                while(left < right) {
+                    int mid = (left + right) / 2;
+                    if(arr[i] == sum + arr[mid]) {
                         System.out.println(arr[i]);
                         return;
-                    } else if(sum > arr[i] || arr[j] + sum < arr[i]) {
-                        break;
+                    }
+                    
+                    if(arr[i] > sum + arr[mid]) {
+                        left = mid + 1;
+                    } else {
+                        right = mid - 1;
                     }
                 }
             }
