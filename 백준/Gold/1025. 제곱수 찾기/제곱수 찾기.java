@@ -6,10 +6,12 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+        
         String[] NM = br.readLine().split(" ");
         int n = Integer.parseInt(NM[0]);
         int m = Integer.parseInt(NM[1]);
 
+        
         arr = new int[n][m];
 
         for(int i=0; i<n; i++) {
