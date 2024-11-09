@@ -43,14 +43,14 @@ public class Main {
                     queue.add(new Node(S, cur.count + 1, cur.s + "S"));
                 }
 
-                int L = cur.number >= 1000 ? (int)((cur.number % Math.pow(10, (int)Math.log10(cur.number))) * 10 + cur.number / Math.pow(10, (int)Math.log10(cur.number))) : cur.number * 10;
+                int L = cur.number >= 1000 ? cur.number / 1000 + (cur.number % 1000) * 10 : cur.number * 10;
 
                 if(arr[L] > cur.count + 1) {
                     arr[L] = cur.count + 1;
                     queue.add(new Node(L, cur.count + 1, cur.s + "L"));
                 }
 
-                int R = cur.number >= 1000 ? (int)((int)(cur.number / 10) + (cur.number % 10) * Math.pow(10, (int)Math.log10(cur.number))) : cur.number % 10 * 1000 + cur.number / 10;
+                int R = ((cur.number / 10) + (cur.number % 10) * 1000);
 
                 if(arr[R] > cur.count + 1) {
                     arr[R] = cur.count + 1;
