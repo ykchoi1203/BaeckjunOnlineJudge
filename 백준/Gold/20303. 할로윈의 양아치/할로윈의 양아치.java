@@ -60,20 +60,21 @@ public class Main {
             }
         }
 
-        int[][] dp = new int[groups.size() + 1][k];
+        int[][] dp = new int[2][k];
 
         for(int i=1; i<=groups.size(); i++) {
             Group cur = groups.get(i-1);
+            int saveIdx = i % 2 == 0 ? 1 : 0;
             for(int j=1; j < k; j++) {
                 if(j < cur.size) {
-                    dp[i][j] = dp[i-1][j];
+                    dp[saveIdx][j] = dp[i%2][j];
                 } else {
-                    dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j-cur.size] + cur.sum);
+                    dp[saveIdx][j] = Math.max(dp[i%2][j], dp[i%2][j-cur.size] + cur.sum);
                 }
             }
         }
 
-        System.out.println(dp[groups.size()][k-1]);
+        System.out.println(Math.max(dp[0][k-1], dp[1][k-1]));
 
     }
 
