@@ -6,9 +6,7 @@ class Solution {
         
         int[][] copyBeginning = new int[n][m];
         
-        for(int i=0; i<n; i++) {
-            copyBeginning[i] = beginning[i].clone();    
-        }
+        clone(copyBeginning, beginning);
         
         int answer1 = 0;
         for(int i=0; i<n; i++) {
@@ -30,21 +28,13 @@ class Solution {
             }
         }
         
-        for(int i=0; i<n; i++) {
-            for(int j=0; j<m; j++) {
-                if(copyBeginning[i][j] != target[i][j]) {
-                    answer1 = Integer.MAX_VALUE;
-                    break;
-                }
-            }
-            if(answer1 == Integer.MAX_VALUE) break;
+        if(!isSame(copyBeginning, target)) {
+            answer1 = Integer.MAX_VALUE;
         }
         
         copyBeginning = new int[n][m];
         
-        for(int i=0; i<n; i++) {
-            copyBeginning[i] = beginning[i].clone();    
-        }
+        clone(copyBeginning, beginning);
         
         int answer3 = 0;
         for(int i=0; i<n; i++) {
@@ -66,21 +56,13 @@ class Solution {
             }
         }
         
-        for(int i=0; i<n; i++) {
-            for(int j=0; j<m; j++) {
-                if(copyBeginning[i][j] != target[i][j]) {
-                    answer3 = Integer.MAX_VALUE;
-                    break;
-                }
-            }
-            if(answer3 == Integer.MAX_VALUE) break;
+        if(!isSame(copyBeginning, target)) {
+            answer3 = Integer.MAX_VALUE;
         }
         
         copyBeginning = new int[n][m];
         
-        for(int i=0; i<n; i++) {
-            copyBeginning[i] = beginning[i].clone();    
-        }
+        clone(copyBeginning, beginning);
         
         int answer4 = 0;
         for(int j=0; j<m; j++) {
@@ -102,14 +84,8 @@ class Solution {
             }
         }
         
-        for(int i=0; i<n; i++) {
-            for(int j=0; j<m; j++) {
-                if(copyBeginning[i][j] != target[i][j]) {
-                    answer4 = Integer.MAX_VALUE;
-                    break;
-                }
-            }
-            if(answer4 == Integer.MAX_VALUE) break;
+        if(!isSame(copyBeginning, target)) {
+            answer4 = Integer.MAX_VALUE;
         }
         
         int answer2 = 0;
@@ -133,14 +109,8 @@ class Solution {
             }
         }
         
-        for(int i=0; i<n; i++) {
-            for(int j=0; j<m; j++) {
-                if(beginning[i][j] != target[i][j]) {
-                    answer2 = Integer.MAX_VALUE;
-                    break;
-                }
-            }
-            if(answer2 == Integer.MAX_VALUE) break;
+        if(!isSame(beginning, target)) {
+            answer2 = Integer.MAX_VALUE;
         }
    
         if(answer1 == Integer.MAX_VALUE && answer2 == Integer.MAX_VALUE && answer3 == Integer.MAX_VALUE && answer4 == Integer.MAX_VALUE) {
@@ -149,5 +119,22 @@ class Solution {
         
         return Math.min(answer1, Math.min(answer2, Math.min(answer3, answer4)));
         
+    }
+    
+    public boolean isSame(int[][] beginning, int[][] target) {
+        for(int i=0; i<target.length; i++) {
+            for(int j=0; j<target[i].length; j++) {
+                if(beginning[i][j] != target[i][j])
+                    return false;
+            }
+        }
+        return true;
+    }
+    
+    public void clone(int[][] copyBeginning, int[][] beginning) {
+        for(int i=0; i<beginning.length; i++) {
+            copyBeginning[i] = beginning[i].clone();    
+        }
+
     }
 }
