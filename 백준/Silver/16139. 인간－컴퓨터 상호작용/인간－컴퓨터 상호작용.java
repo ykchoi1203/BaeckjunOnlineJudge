@@ -11,6 +11,7 @@ public class Main {
         
         int[][] dp = new int[26][s.length() + 1];
         
+        StringBuilder sb = new StringBuilder();
         
         for(int i=0; i<s.length(); i++) {
             int k = s.charAt(i) - 'a';
@@ -27,7 +28,9 @@ public class Main {
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken()) + 1;
             
-            System.out.println(dp[c][b] - dp[c][a]);
+            sb.append(dp[c][b] - dp[c][a]).append("\n");
         }
+        
+        System.out.print(sb);
     }
 }
