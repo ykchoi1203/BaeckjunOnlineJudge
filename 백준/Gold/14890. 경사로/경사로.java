@@ -21,23 +21,17 @@ public class Main {
         }
 
         int answer = 0;
-
+        int plusMinus = -1;
         for(int i = 0; i < n; i++) {
             int lastHeight = arr[i][0];
             boolean isTrue = true;
-            int plusMinus = 0;
+            
             loop:
             for(int j = 1; j < n; j++) {
                 if(arr[i][j] < lastHeight) {
                     if(n - j < l || arr[i][j] + 1 != lastHeight) {
                         isTrue = false;
                         break loop;
-                    }
-
-                    if(arr[i][j] < lastHeight) {
-                        plusMinus = -1;
-                    } else if(arr[i][j] > lastHeight) {
-                        plusMinus = 1;
                     }
 
                     for(int k = j; k < j + l && k < n; k++) {
@@ -60,20 +54,12 @@ public class Main {
 
             if(isTrue) {
                 lastHeight = arr[i][n - 1];
-                isTrue = true;
-                plusMinus = 0;
                 loop:
                 for(int j = n-2; j >= 0; j--) {
                     if(arr[i][j] < lastHeight) {
                         if(j + 1 < l || arr[i][j] + 1 != lastHeight) {
                             isTrue = false;
                             break loop;
-                        }
-
-                        if(arr[i][j] < lastHeight) {
-                            plusMinus = -1;
-                        } else if(arr[i][j] > lastHeight) {
-                            plusMinus = 1;
                         }
 
                         for(int k = j; k > j - l && k >= 0; k--) {
@@ -99,19 +85,12 @@ public class Main {
         for(int i = 0; i < n; i++) {
             int lastHeight = arr[0][i];
             boolean isTrue = true;
-            int plusMinus = 0;
             loop:
             for(int j = 1; j < n; j++) {
                 if(arr[j][i] < lastHeight ) {
                     if(n - j < l || arr[j][i] + 1 != lastHeight) {
                         isTrue = false;
                         break loop;
-                    }
-
-                    if(arr[j][i] < lastHeight) {
-                        plusMinus = -1;
-                    } else if(arr[j][i] > lastHeight) {
-                        plusMinus = 1;
                     }
 
                     for(int k = j; k < j + l && k < n; k++) {
@@ -135,8 +114,6 @@ public class Main {
 
             if(isTrue) {
                 lastHeight = arr[n - 1][i];
-                isTrue = true;
-                plusMinus = 0;
                 loop:
                 for(int j = n-2; j >= 0; j--) {
                     if(arr[j][i] < lastHeight ) {
@@ -144,13 +121,7 @@ public class Main {
                             isTrue = false;
                             break loop;
                         }
-
-                        if(arr[j][i] < lastHeight) {
-                            plusMinus = -1;
-                        } else if(arr[j][i] > lastHeight) {
-                            plusMinus = 1;
-                        }
-
+                        
                         for(int k = j; k > j - l && k >= 0; k--) {
                             if(arr[k][i] != arr[j][i] || (makeLoad[k][i] != 0 && makeLoad[k][i] != -plusMinus)) {
                                 isTrue = false;
