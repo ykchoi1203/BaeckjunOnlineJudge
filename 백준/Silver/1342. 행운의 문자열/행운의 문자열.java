@@ -9,11 +9,7 @@ public class Main {
         len = s.length();
         
         for(int i = 0; i < s.length(); i++) {
-            if(!dp.containsKey(s.charAt(i) - 'a')) {
-                dp.put(s.charAt(i) - 'a', 0);
-            }
-            
-            dp.put(s.charAt(i) - 'a', dp.get(s.charAt(i) - 'a') + 1);
+            dp[s.charAt(i) - 'a']++;
         }
         
         dfs(0, -1);
@@ -22,7 +18,7 @@ public class Main {
         
     }
     
-    static Map<Integer, Integer> dp = new HashMap<>();
+    static int[] dp = new int[26];
     static int answer = 0;
     static int len;
     
@@ -32,12 +28,12 @@ public class Main {
             return;
         }
         
-        for(int i : dp.keySet()) {
+        for(int i = 0; i < 26; i++) {
             if(lastChar == i) continue;
-            if(dp.get(i) > 0) {
-                dp.put(i, dp.get(i) - 1);
+            if(dp[i] > 0) {
+                dp[i]--;
                 dfs(idx + 1, i);
-                dp.put(i, dp.get(i) + 1);
+                dp[i]++;
             }
         }
     }
