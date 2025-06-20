@@ -23,9 +23,10 @@ public class Main {
                 arr[i] = 2;
             }
 
-            for(int j = 3; j <= i / 2; j+=2) {
+            for(int j = (i / 2) % 2 == 0 ? i / 2 - 1 : i / 2 ; j > 2; j-=2) {
                 if(prime[j] && prime[i - j]) {
                     arr[i] = j;
+                    break;
                 }
             }
         }
