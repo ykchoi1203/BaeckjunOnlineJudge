@@ -1,4 +1,5 @@
 import java.util.*;
+import java.math.BigInteger;
 
 public class Main {
     public static void main(String[] args) {
@@ -6,65 +7,22 @@ public class Main {
 
         int n = sc.nextInt();
 
-        long a = 0;
-        long b = 1;
+        BigInteger a = BigInteger.valueOf(0);
+        BigInteger b = BigInteger.valueOf(1);
 
+        BigInteger[] arr = new BigInteger[n + 1];
+        arr[0] = a;
+        
         if(n == 0) {
             System.out.println(0);
             return;
-        } else if(n == 1) {
-            System.out.println(1);
-            return;
         }
+        arr[1] = b;
 
-        int cnt = 1;
+        for(int i=2; i <= n; i++)
+            arr[i] = arr[i- 2].add(arr[i-1]);
 
-        String aS = "0";
-        String bS = "1";
 
-        while(cnt < n) {
-            Stack<Integer> stack = new Stack<>();
-
-            int isBigTen = 0;
-            int len = bS.length() - aS.length();
-            for(int i = aS.length() - 1; i >= 0; i--) {
-                int cur = (aS.charAt(i) - '0') + (bS.charAt(i + len) - '0') + isBigTen;
-                if(cur >= 10) {
-                    stack.push(cur - 10);
-                    isBigTen = 1;
-                } else {
-                    isBigTen = 0;
-                    stack.push(cur);
-                }
-            }
-
-            for(int i = bS.length() - aS.length() - 1; i >= 0; i--) {
-                int cur = (bS.charAt(i) - '0') + isBigTen;
-                if(cur >= 10) {
-                    stack.push(cur - 10);
-                    isBigTen = 1;
-                } else {
-                    isBigTen = 0;
-                    stack.push(cur);
-                }
-            }
-
-            if(bS.length() == aS.length() && isBigTen == 1) {
-                stack.push(1);
-            }
-
-            StringBuilder stringBuilder = new StringBuilder();
-
-            while(!stack.isEmpty()) {
-                stringBuilder.append(stack.pop());
-            }
-
-            aS = bS;
-            bS = stringBuilder.toString();
-            cnt++;
-        }
-
-        System.out.println(bS);
-
+        System.out.println(arr[n]);
     }
 }
