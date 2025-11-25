@@ -32,9 +32,8 @@ public class Main {
         }
 
         arr = new int[N + 1];
-        visited = new boolean[N + 1];
 
-        dfs(R);
+        dfs(R, 0);
 
         StringBuilder sb = new StringBuilder();
         for(int i=0; i<Q; i++) {
@@ -48,17 +47,14 @@ public class Main {
     }
 
     static int[] arr;
-    static boolean[] visited;
     static ArrayList<Set<Integer>> list;
 
-    public static void dfs(int idx) {
+    public static void dfs(int idx, int parent) {
         int sum = 1;
-        visited[idx] = true;
 
         for(int next : list.get(idx)) {
-            if(!visited[next]) {
-                visited[next] = true;
-                dfs(next);
+            if(next != parent) {
+                dfs(next, idx);
                 sum += arr[next];
             }
         }
